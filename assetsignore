@@ -1,0 +1,7 @@
+.git
+.gitignore
+.wrangler
+wrangler.jsonc
+README.md
+make_qr.py
+img/BENI-OKU.txt
