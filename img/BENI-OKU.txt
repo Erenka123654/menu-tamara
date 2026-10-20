@@ -1,0 +1,15 @@
+Bu klasördeki .svg dosyaları demo için çizilmiş örnek görsellerdir.
+Gerçek bir müşteriye menü hazırlarken bunları müşterinin kendi fotoğraflarıyla değiştir.
+
+Yemek ve mekan fotoğraflarını bu klasöre koy.
+
+Sonra menu-data.js içinde ilgili ürünün img satırını güncelle:
+  img: "img/menemen.jpg"
+
+Mekan kapağı için info bölümüne:
+  cover: "img/kapak.jpg"
+
+Öneriler:
+- Yemek fotoğrafı: kare veya 4:3, 800 piksel genişlik, 150 KB altı (JPG).
+- Kapak fotoğrafı: yatay, 1400 piksel genişlik, 300 KB altı.
+- Dosya adlarında Türkçe karakter ve boşluk kullanma (menemen.jpg gibi yaz).

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B1820">
+  <meta name="color-scheme" content="dark">
+  <title>Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="demo" id="demo" hidden></div>
+
+  <header class="hero" id="hero">
+    <h1 class="name" id="name"></h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="tagline" id="tagline"></p>
+    <div class="langs" id="langs" role="group" aria-label="Language"></div>
+  </header>
+
+  <div class="bar">
+    <nav class="chips" id="chips"></nav>
+  </div>
+
+  <div class="search">
+    <input id="q" type="search" autocomplete="off" enterkeyhint="search">
+  </div>
+
+  <main id="menu"></main>
+  <p class="empty" id="empty" hidden></p>
+
+  <footer class="foot">
+    <div class="actions" id="actions"></div>
+    <div id="wifi"></div>
+    <p class="note" id="allergy"></p>
+    <p class="credit" id="credit" hidden></p>
+  </footer>
+
+  <dialog id="sheet" aria-labelledby="sheet-name">
+    <button type="button" class="x" id="sheet-x">&times;</button>
+    <div class="sheet-ph" id="sheet-ph"></div>
+    <div class="sheet-body">
+      <h3 id="sheet-name"></h3>
+      <p class="sheet-desc" id="sheet-desc"></p>
+      <div class="meta">
+        <span class="pr" id="sheet-price"></span>
+        <span class="tags" id="sheet-tags"></span>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
