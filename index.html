@@ -85,13 +85,41 @@
       <label class="cart-field"><span id="cart-note-l"></span>
         <textarea id="cart-note" rows="2" maxlength="200"></textarea>
       </label>
+      <button type="button" class="btn primary cart-pay" id="cart-pay" hidden></button>
       <button type="button" class="btn primary cart-send" id="cart-send"></button>
       <button type="button" class="cart-clear" id="cart-clear"></button>
       <p class="cart-hint" id="cart-hint"></p>
     </div>
   </dialog>
 
+  <dialog id="pay" aria-labelledby="pay-title">
+    <button type="button" class="x" id="pay-x">&times;</button>
+    <div class="pay-body">
+      <p class="pay-test" id="pay-test"></p>
+
+      <div id="pay-form">
+        <h3 id="pay-title"></h3>
+        <ul class="pay-sum" id="pay-sum"></ul>
+        <div class="cart-total"><span id="pay-total-l"></span><strong id="pay-total"></strong></div>
+        <p class="pay-mt" id="pay-mt"></p>
+        <div class="pay-methods" id="pay-methods" role="radiogroup"></div>
+        <button type="button" class="btn primary pay-go" id="pay-go"></button>
+        <p class="cart-hint" id="pay-note"></p>
+      </div>
+
+      <div id="pay-done" hidden aria-live="polite">
+        <div class="pay-check" aria-hidden="true">&#10003;</div>
+        <h3 id="pay-done-t"></h3>
+        <p class="pay-no" id="pay-no"></p>
+        <p class="pay-dd" id="pay-dd"></p>
+        <ol class="pay-steps" id="pay-steps"></ol>
+        <button type="button" class="btn primary pay-go" id="pay-close"></button>
+      </div>
+    </div>
+  </dialog>
+
   <script src="menu-data.js"></script>
+  <script src="orders.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

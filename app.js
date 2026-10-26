@@ -13,6 +13,12 @@
       wa: 'WhatsApp ile yazın', ig: 'Instagram', review: 'Google\'da yorum yazın',
       pass: 'Şifre', copy: 'Kopyala', copied: 'Kopyalandı',
       allergy: 'Alerjiniz varsa lütfen servis personelimize bildirin.',
+      payNow: 'Şimdi öde (test)', payTitle: 'Ödeme', payTest: 'TEST MODU — gerçek ödeme alınmaz',
+      payMethods: 'Ödeme yöntemi', payCard: 'Kredi / banka kartı', payWallet: 'Apple Pay / Google Pay',
+      payGo: 'Öde', paying: 'Ödeme alınıyor…', paidT: 'Ödeme alındı', orderNo: 'Sipariş no',
+      toKitchen: 'Siparişiniz mutfağa iletildi. Masanızdan kalkmanıza gerek yok.',
+      payNote: 'Bu bir demodur: kart bilgisi istenmez ve hiçbir ücret çekilmez.', ok: 'Tamam', tableLbl: 'Masa',
+      st_paid: 'Sipariş alındı', st_preparing: 'Hazırlanıyor', st_ready: 'Hazır, afiyet olsun', st_done: 'Teslim edildi',
       theme: 'Temayı değiştir', alFilter: 'Alerjen filtresi', alFilterOn: 'Alerjen filtresi ({n})',
       alTitle: 'Alerjenler', alNone: 'Bilinen alerjen yok',
       add: 'Sepete ekle', addMore: 'Sepete bir tane daha ekle', cart: 'Sepetim', viewCart: 'Sepeti gör',
@@ -28,6 +34,12 @@
       wa: 'Message us on WhatsApp', ig: 'Instagram', review: 'Leave a Google review',
       pass: 'Password', copy: 'Copy', copied: 'Copied',
       allergy: 'If you have an allergy, please tell our staff before ordering.',
+      payNow: 'Pay now (test)', payTitle: 'Payment', payTest: 'TEST MODE — no real payment is taken',
+      payMethods: 'Payment method', payCard: 'Credit / debit card', payWallet: 'Apple Pay / Google Pay',
+      payGo: 'Pay', paying: 'Processing payment…', paidT: 'Payment received', orderNo: 'Order no.',
+      toKitchen: 'Your order was sent to the kitchen. No need to leave your table.',
+      payNote: 'This is a demo: no card details are asked for and nothing is charged.', ok: 'Done', tableLbl: 'Table',
+      st_paid: 'Order received', st_preparing: 'Preparing', st_ready: 'Ready, enjoy your meal', st_done: 'Delivered',
       theme: 'Switch theme', alFilter: 'Allergen filter', alFilterOn: 'Allergen filter ({n})',
       alTitle: 'Allergens', alNone: 'No known allergens',
       add: 'Add to order', addMore: 'Add one more', cart: 'Your order', viewCart: 'View order',
@@ -43,6 +55,12 @@
       wa: 'Per WhatsApp schreiben', ig: 'Instagram', review: 'Google-Bewertung abgeben',
       pass: 'Passwort', copy: 'Kopieren', copied: 'Kopiert',
       allergy: 'Bei Allergien informieren Sie bitte vor der Bestellung unser Personal.',
+      payNow: 'Jetzt zahlen (Test)', payTitle: 'Zahlung', payTest: 'TESTMODUS — es wird nichts abgebucht',
+      payMethods: 'Zahlungsart', payCard: 'Kredit- / Debitkarte', payWallet: 'Apple Pay / Google Pay',
+      payGo: 'Bezahlen', paying: 'Zahlung wird verarbeitet…', paidT: 'Zahlung erhalten', orderNo: 'Bestellnr.',
+      toKitchen: 'Ihre Bestellung wurde an die Küche übermittelt. Sie müssen nicht aufstehen.',
+      payNote: 'Dies ist eine Demo: Es werden keine Kartendaten abgefragt und nichts abgebucht.', ok: 'Fertig', tableLbl: 'Tisch',
+      st_paid: 'Bestellung erhalten', st_preparing: 'Wird zubereitet', st_ready: 'Fertig, guten Appetit', st_done: 'Serviert',
       theme: 'Design wechseln', alFilter: 'Allergenfilter', alFilterOn: 'Allergenfilter ({n})',
       alTitle: 'Allergene', alNone: 'Keine bekannten Allergene',
       add: 'Zur Bestellung', addMore: 'Noch eins hinzufügen', cart: 'Ihre Bestellung', viewCart: 'Bestellung ansehen',
@@ -58,6 +76,12 @@
       wa: 'Написать в WhatsApp', ig: 'Instagram', review: 'Оставить отзыв в Google',
       pass: 'Пароль', copy: 'Копировать', copied: 'Скопировано',
       allergy: 'При аллергии, пожалуйста, сообщите об этом официанту перед заказом.',
+      payNow: 'Оплатить сейчас (тест)', payTitle: 'Оплата', payTest: 'ТЕСТОВЫЙ РЕЖИМ — деньги не списываются',
+      payMethods: 'Способ оплаты', payCard: 'Банковская карта', payWallet: 'Apple Pay / Google Pay',
+      payGo: 'Оплатить', paying: 'Обработка платежа…', paidT: 'Оплата получена', orderNo: 'Заказ №',
+      toKitchen: 'Заказ передан на кухню. Вставать из-за стола не нужно.',
+      payNote: 'Это демо: данные карты не запрашиваются, деньги не списываются.', ok: 'Готово', tableLbl: 'Стол',
+      st_paid: 'Заказ принят', st_preparing: 'Готовится', st_ready: 'Готово, приятного аппетита', st_done: 'Выдано',
       theme: 'Сменить тему', alFilter: 'Фильтр аллергенов', alFilterOn: 'Фильтр аллергенов ({n})',
       alTitle: 'Аллергены', alNone: 'Известных аллергенов нет',
       add: 'Добавить в заказ', addMore: 'Добавить ещё одно', cart: 'Ваш заказ', viewCart: 'Открыть заказ',
@@ -127,6 +151,25 @@
     cartNoteL: document.getElementById('cart-note-l'),
     cartNote: document.getElementById('cart-note'),
     cartSend: document.getElementById('cart-send'),
+    cartPay: document.getElementById('cart-pay'),
+    pay: document.getElementById('pay'),
+    payX: document.getElementById('pay-x'),
+    payTest: document.getElementById('pay-test'),
+    payForm: document.getElementById('pay-form'),
+    payTitle: document.getElementById('pay-title'),
+    paySum: document.getElementById('pay-sum'),
+    payTotalL: document.getElementById('pay-total-l'),
+    payTotal: document.getElementById('pay-total'),
+    payMt: document.getElementById('pay-mt'),
+    payMethods: document.getElementById('pay-methods'),
+    payGo: document.getElementById('pay-go'),
+    payNote: document.getElementById('pay-note'),
+    payDone: document.getElementById('pay-done'),
+    payDoneT: document.getElementById('pay-done-t'),
+    payNo: document.getElementById('pay-no'),
+    payDd: document.getElementById('pay-dd'),
+    paySteps: document.getElementById('pay-steps'),
+    payClose: document.getElementById('pay-close'),
     cartClear: document.getElementById('cart-clear'),
     cartHint: document.getElementById('cart-hint')
   };
@@ -136,6 +179,8 @@
   var openItem = null;          /* detay penceresinde açık ürün */
   var excluded = {};            /* alerjen filtresi: { gluten: true } */
   var cart = loadCart();        /* { "c-i": adet } */
+  var payToken = 0;             /* ödeme işlemi iptal/yenileme koruması */
+  var payOrderId = null;        /* ödeme sonrası takip edilen sipariş */
 
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
@@ -149,7 +194,13 @@
     return LANGS.indexOf(nav) > -1 ? nav : 'en';
   }
 
+  /* Sayfa kaydırma kilidini yalnızca hiçbir pencere açık değilse kaldır */
+  function unlock() {
+    if (!document.querySelector('dialog[open]')) document.documentElement.classList.remove('lock');
+  }
+
   function ordering() { return DATA.info.ordering !== false && !!DATA.info.whatsapp; }
+  function paying() { return ordering() && DATA.info.payment === 'test' && !!window.OrderStore; }
 
   function itemOf(key) {
     var p = key.split('-');
@@ -333,7 +384,7 @@
   function closeSheet() {
     if (typeof el.sheet.close === 'function') el.sheet.close();
     else el.sheet.removeAttribute('open');
-    document.documentElement.classList.remove('lock');
+    unlock();
   }
 
   function setActive(id) {
@@ -439,6 +490,10 @@
     el.cartTableL.textContent = ui.table;
     el.cartNoteL.textContent = ui.note;
     el.cartSend.textContent = ui.send;
+    el.cartPay.hidden = !paying();
+    el.cartPay.textContent = ui.payNow;
+    el.cartPay.disabled = keys.length === 0;
+    el.cartSend.classList.toggle('primary', !paying());
     el.cartClear.textContent = ui.clear;
     el.cartHint.textContent = ui.cartHint;
     el.cartEmpty.textContent = ui.cartEmpty;
@@ -469,7 +524,7 @@
   function closeCart() {
     if (typeof el.cart.close === 'function') el.cart.close();
     else el.cart.removeAttribute('open');
-    document.documentElement.classList.remove('lock');
+    unlock();
   }
 
   /* Sipariş mesajı: işletme personeli okuyacağı için her zaman Türkçe */
@@ -487,6 +542,108 @@
     var note = el.cartNote.value.trim();
     if (note) lines.push('Not: ' + note);
     return lines.join('\n');
+  }
+
+  /* ---------- Test ödeme akışı ---------- */
+  function orderItems() {
+    return Object.keys(cart).map(function (k) {
+      var it = itemOf(k);
+      return { name: it.name.tr || t(it.name), qty: cart[k], price: it.price };
+    });
+  }
+
+  function renderSteps(status) {
+    var ui = UI[lang];
+    var order = window.OrderStore.STATUSES;
+    var at = Math.max(0, order.indexOf(status));
+    fill(el.paySteps, order.map(function (st, i) {
+      return h('li', { class: i < at ? 'done' : (i === at ? 'now' : ''), text: ui['st_' + st] });
+    }));
+  }
+
+  function showPayForm() {
+    var ui = UI[lang];
+    payOrderId = null;
+    el.payForm.hidden = false;
+    el.payDone.hidden = true;
+    el.payTest.textContent = ui.payTest;
+    el.payTitle.textContent = ui.payTitle;
+    el.payX.setAttribute('aria-label', ui.close);
+    el.payTotalL.textContent = ui.total;
+    el.payTotal.textContent = cartSum() + ' ₺';
+    el.payMt.textContent = ui.payMethods;
+    el.payNote.textContent = ui.payNote;
+    el.payGo.textContent = ui.payGo + ' ' + cartSum() + ' ₺';
+    el.payGo.disabled = false;
+
+    fill(el.paySum, Object.keys(cart).map(function (k) {
+      var it = itemOf(k);
+      return h('li', null, [
+        h('span', { text: cart[k] + '× ' + t(it.name) }),
+        h('span', { text: (cart[k] * it.price) + ' ₺' })
+      ]);
+    }));
+
+    fill(el.payMethods, [['card', ui.payCard], ['wallet', ui.payWallet]].map(function (m, i) {
+      var input = h('input', { type: 'radio', name: 'pm', value: m[0] });
+      if (i === 0) input.checked = true;
+      return h('label', { class: 'pm' }, [input, h('span', { text: m[1] })]);
+    }));
+  }
+
+  function openPay() {
+    if (!cartCount()) return;
+    showPayForm();
+    closeCart();
+    document.documentElement.classList.add('lock');
+    if (typeof el.pay.showModal === 'function') el.pay.showModal();
+    else el.pay.setAttribute('open', '');
+    el.pay.scrollTop = 0;
+  }
+
+  function closePay() {
+    payToken++;
+    if (typeof el.pay.close === 'function') el.pay.close();
+    else el.pay.removeAttribute('open');
+    unlock();
+  }
+
+  function showPaid(order) {
+    var ui = UI[lang];
+    payOrderId = order.id;
+    el.payForm.hidden = true;
+    el.payDone.hidden = false;
+    el.payDoneT.textContent = ui.paidT;
+    el.payNo.textContent = ui.orderNo + ' ' + order.id + (order.table ? '  ·  ' + ui.tableLbl + ' ' + order.table : '');
+    el.payDd.textContent = ui.toKitchen;
+    el.payClose.textContent = ui.ok;
+    renderSteps(order.status);
+  }
+
+  function startPayment() {
+    var ui = UI[lang];
+    if (!cartCount()) return;
+    var checked = el.payMethods.querySelector('input:checked');
+    var method = checked ? checked.value : 'card';
+    var token = ++payToken;
+    el.payGo.disabled = true;
+    el.payGo.textContent = ui.paying;
+    setTimeout(function () {
+      if (token !== payToken) return;           /* kullanıcı pencereyi kapattı */
+      var order = window.OrderStore.add({
+        table: el.cartTable.value.trim(),
+        note: el.cartNote.value.trim(),
+        items: orderItems(),
+        total: cartSum(),
+        method: method,
+        test: true
+      });
+      cart = {};
+      saveCart();
+      el.cartNote.value = '';
+      refreshCart();
+      showPaid(order);
+    }, reduced ? 300 : 1500);
   }
 
   function copyText(text, btn, ui) {
@@ -606,7 +763,7 @@
 
   el.sheetX.addEventListener('click', closeSheet);
   el.sheet.addEventListener('click', function (e) { if (e.target === el.sheet) closeSheet(); });
-  el.sheet.addEventListener('close', function () { document.documentElement.classList.remove('lock'); });
+  el.sheet.addEventListener('close', function () { unlock(); });
 
   el.q.addEventListener('input', applyFilter);
 
@@ -638,7 +795,7 @@
   el.cartbar.addEventListener('click', openCart);
   el.cartX.addEventListener('click', closeCart);
   el.cart.addEventListener('click', function (e) { if (e.target === el.cart) closeCart(); });
-  el.cart.addEventListener('close', function () { document.documentElement.classList.remove('lock'); });
+  el.cart.addEventListener('close', function () { unlock(); });
 
   el.cartList.addEventListener('click', function (e) {
     var b = e.target.closest('button[data-key]');
@@ -646,6 +803,20 @@
     changeQty(b.getAttribute('data-key'), +b.getAttribute('data-d'));
     if (!cartCount()) closeCart();
   });
+
+  el.cartPay.addEventListener('click', openPay);
+  el.payGo.addEventListener('click', startPayment);
+  el.payX.addEventListener('click', closePay);
+  el.payClose.addEventListener('click', closePay);
+  el.pay.addEventListener('click', function (e) { if (e.target === el.pay) closePay(); });
+  el.pay.addEventListener('close', function () { payToken++; unlock(); });
+  if (window.OrderStore) {
+    window.OrderStore.onChange(function () {
+      if (!payOrderId || !el.pay.open) return;
+      var o = window.OrderStore.get(payOrderId);
+      if (o) renderSteps(o.status);
+    });
+  }
 
   el.cartClear.addEventListener('click', function () {
     cart = {};
