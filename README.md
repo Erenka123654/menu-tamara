@@ -10,6 +10,7 @@ Neler var:
 - WhatsApp'a sipariş sepeti: ürünlerde "+" butonu, adet ayarı, masa numarası ve not, hazır mesajla gönderme
 - Alerjen filtresi ve ürün detayında alerjen rozetleri (4 dilde)
 - Gündüz / gece teması (seçim hatırlanır)
+- Test modlu ödeme akışı ve mutfak paneli (`mutfak.html`): müşteri masadan kalkmadan "öder", sipariş panelde görünür, durum müşteriye canlı yansır
 
 ## Dosyalar
 
@@ -27,6 +28,16 @@ Neler var:
 - **Sepet:** `menu-data.js` içinde `info.ordering: true` ve `info.whatsapp` doluysa çıkar. Müşteri "+" ile ürün ekler, alttaki çubuktan sepeti açar, masa numarası ve not yazıp **WhatsApp ile siparişi gönder** der. Mesaj işletme personeli okuyacağı için her zaman Türkçe hazırlanır. Sepet tarayıcıda saklanır, sayfa yenilense de kaybolmaz. Sipariş gerçekten işletmeye ancak müşteri WhatsApp'ta "gönder" tuşuna basınca ulaşır; panel veya sipariş kaydı yoktur.
 - **Alerjen:** Ürüne `al: ["gluten", "dairy"]` gibi bir liste ekle (seçenekler: `gluten`, `dairy`, `egg`, `nuts`, `fish`, `shellfish`, `sesame`). Menünün üstündeki **Alerjen filtresi** seçilen alerjeni içeren ürünleri gizler. `al: []` "bilinen alerjen yok" demektir. Alan hiç yazılmazsa o ürün filtreden etkilenmez ve detayında alerjen bölümü görünmez. Demodaki değerler örnektir, gerçek menüde mutfakla kontrol et.
 - **Tema:** Sağ üstteki düğme gündüz / gece temasını değiştirir. Renkler `style.css` içindeki `:root` ve `:root[data-theme="light"]` bölümlerindedir.
+
+## Test ödeme ve mutfak paneli
+
+Esnafa "masadan kalkmadan ödeme" akışını göstermek için hazırlanmış **test modudur. Gerçek para çekilmez, kart bilgisi sorulmaz.**
+
+1. `menu-data.js` içinde `info.payment: "test"` olmalı (`ordering` ve `whatsapp` de dolu). Kapatmak için `payment: ""` yap, sepette yalnızca WhatsApp seçeneği kalır.
+2. Müşteri sepette **Şimdi öde (test)** der, ödeme yöntemini seçer, **Öde** der. Ekranda "TEST MODU" şeridi durur. İşlem bitince sipariş numarası ve adım adım durum görünür.
+3. Siparişi **`mutfak.html`** sayfası gösterir (örn. `https://adresin/mutfak.html`). Orada "Hazırlamaya başla", "Hazır", "Teslim edildi" düğmeleri vardır. Müşteri ekranı bu durumu canlı gösterir. Panelde "Örnek sipariş oluştur" düğmesi tek başına gösterim yapmana yarar.
+4. **Sınır:** Siparişler `orders.js` ile tarayıcının localStorage alanında tutulur. Müşteri sayfası ve panel yalnızca **aynı tarayıcıda** (iki sekme) birbirini görür. Gösterimi tek bilgisayarda iki sekmeyle veya telefonun kendisinde yap. Gerçek kullanımda farklı cihazlar için `orders.js` içi bir sunucuya (örn. Cloudflare Worker + D1) bağlanır ve gerçek ödeme sağlayıcısı (iyzico, PayTR vb.) eklenir. `app.js` ve `panel.js` değişmez.
+5. `mutfak.html` menüde bağlantı olarak verilmez. Adresi yalnızca işletme bilir. Gerçek kullanımda bu sayfa şifreyle korunmalıdır.
 
 ## 1. Bilgisayarda önizleme
 

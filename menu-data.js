@@ -12,6 +12,9 @@
   info.credit      : En altta küçük bir imza satırı (örn. "Hazırlayan: Eren.ai"). Boşsa görünmez.
   info.ordering    : true ise ürünlerde "+" butonu ve sepet çıkar. Sepet, siparişi WhatsApp mesajı olarak
                      info.whatsapp numarasına gönderir. whatsapp boşsa sepet otomatik gizlenir.
+  info.payment     : "test" ise sepette "Şimdi öde (test)" butonu çıkar: gerçek para çekilmeyen, ekranda
+                     TEST MODU yazan ödeme akışı. Sipariş mutfak.html panelinde görünür. Boş/false ise ödeme yok,
+                     sadece WhatsApp ile gönderme kalır. (info.ordering ve info.whatsapp de dolu olmalı.)
   tags             : "p" = Çok sevilen, "v" = Vejetaryen, "s" = Acılı
   al (ürün için)   : alerjen listesi. Seçenekler: gluten, dairy, egg, nuts, fish, shellfish, sesame
                      Alerjen filtresi ve ürün detayındaki alerjen rozetleri buradan gelir.
@@ -28,6 +31,7 @@ window.MENU = {
     cover: "",
     placeholders: true,
     ordering: true,
+    payment: "test",
     credit: "",
     name: "Demo Restoran & Cafe",
     tagline: {

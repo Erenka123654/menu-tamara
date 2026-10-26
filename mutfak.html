@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark light">
+  <title>Gelen siparişler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="panel.css">
+  <script>
+    try { if (localStorage.getItem('menu-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+  </script>
+</head>
+<body class="panel">
+  <header class="ph-head">
+    <div>
+      <p class="ph-eyebrow" id="biz"></p>
+      <h1>Gelen siparişler</h1>
+    </div>
+    <span class="ph-test">TEST MODU</span>
+  </header>
+
+  <div class="ph-tabs" role="tablist">
+    <button type="button" role="tab" id="tab-active" aria-selected="true"></button>
+    <button type="button" role="tab" id="tab-done" aria-selected="false"></button>
+  </div>
+
+  <main id="list" class="ph-list"></main>
+  <p class="ph-empty" id="empty" hidden></p>
+
+  <footer class="ph-foot">
+    <button type="button" class="ph-btn" id="demo-order">Örnek sipariş oluştur</button>
+    <button type="button" class="ph-btn ghost" id="clear">Tümünü temizle</button>
+    <p>Demo: siparişler bu tarayıcıda saklanır. Müşteri sayfası ve bu panel aynı tarayıcıda (iki sekmede) birbirini canlı görür.</p>
+  </footer>
+
+  <script src="menu-data.js"></script>
+  <script src="orders.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>
