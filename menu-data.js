@@ -40,7 +40,7 @@ window.MENU = {
       de: "Frische Hausmannskost in Alanya",
       ru: "Свежая домашняя кухня в Аланье"
     },
-    whatsapp: "905000000000",
+    whatsapp: "905013242362",
     instagram: "demorestoran",
     review: "",
     wifi: { name: "DemoRestoran", pass: "12345678" }
