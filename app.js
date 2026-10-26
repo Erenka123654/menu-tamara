@@ -13,6 +13,13 @@
       wa: 'WhatsApp ile yazın', ig: 'Instagram', review: 'Google\'da yorum yazın',
       pass: 'Şifre', copy: 'Kopyala', copied: 'Kopyalandı',
       allergy: 'Alerjiniz varsa lütfen servis personelimize bildirin.',
+      theme: 'Temayı değiştir', alFilter: 'Alerjen filtresi', alFilterOn: 'Alerjen filtresi ({n})',
+      alTitle: 'Alerjenler', alNone: 'Bilinen alerjen yok',
+      add: 'Sepete ekle', addMore: 'Sepete bir tane daha ekle', cart: 'Sepetim', viewCart: 'Sepeti gör',
+      items: 'ürün', total: 'Toplam', table: 'Masa numarası (isteğe bağlı)', note: 'Sipariş notu (isteğe bağlı)',
+      send: 'WhatsApp ile siparişi gönder', clear: 'Sepeti temizle', cartEmpty: 'Sepetiniz boş.',
+      cartHint: 'Sipariş, hazır mesaj olarak WhatsApp\'ta açılır. Göndermeden önce kontrol edebilirsiniz.',
+      dec: 'Azalt', inc: 'Artır',
       demo: 'DEMO — örnek menü', cats: 'Menü kategorileri'
     },
     en: {
@@ -21,6 +28,13 @@
       wa: 'Message us on WhatsApp', ig: 'Instagram', review: 'Leave a Google review',
       pass: 'Password', copy: 'Copy', copied: 'Copied',
       allergy: 'If you have an allergy, please tell our staff before ordering.',
+      theme: 'Switch theme', alFilter: 'Allergen filter', alFilterOn: 'Allergen filter ({n})',
+      alTitle: 'Allergens', alNone: 'No known allergens',
+      add: 'Add to order', addMore: 'Add one more', cart: 'Your order', viewCart: 'View order',
+      items: 'items', total: 'Total', table: 'Table number (optional)', note: 'Order note (optional)',
+      send: 'Send order via WhatsApp', clear: 'Clear order', cartEmpty: 'Your order is empty.',
+      cartHint: 'The order opens in WhatsApp as a ready message. You can review it before sending.',
+      dec: 'Decrease', inc: 'Increase',
       demo: 'DEMO — sample menu', cats: 'Menu categories'
     },
     de: {
@@ -29,6 +43,13 @@
       wa: 'Per WhatsApp schreiben', ig: 'Instagram', review: 'Google-Bewertung abgeben',
       pass: 'Passwort', copy: 'Kopieren', copied: 'Kopiert',
       allergy: 'Bei Allergien informieren Sie bitte vor der Bestellung unser Personal.',
+      theme: 'Design wechseln', alFilter: 'Allergenfilter', alFilterOn: 'Allergenfilter ({n})',
+      alTitle: 'Allergene', alNone: 'Keine bekannten Allergene',
+      add: 'Zur Bestellung', addMore: 'Noch eins hinzufügen', cart: 'Ihre Bestellung', viewCart: 'Bestellung ansehen',
+      items: 'Artikel', total: 'Summe', table: 'Tischnummer (optional)', note: 'Anmerkung (optional)',
+      send: 'Bestellung per WhatsApp senden', clear: 'Bestellung leeren', cartEmpty: 'Ihre Bestellung ist leer.',
+      cartHint: 'Die Bestellung öffnet sich als fertige Nachricht in WhatsApp. Sie können sie vor dem Senden prüfen.',
+      dec: 'Weniger', inc: 'Mehr',
       demo: 'DEMO — Beispielmenü', cats: 'Menükategorien'
     },
     ru: {
@@ -37,9 +58,27 @@
       wa: 'Написать в WhatsApp', ig: 'Instagram', review: 'Оставить отзыв в Google',
       pass: 'Пароль', copy: 'Копировать', copied: 'Скопировано',
       allergy: 'При аллергии, пожалуйста, сообщите об этом официанту перед заказом.',
+      theme: 'Сменить тему', alFilter: 'Фильтр аллергенов', alFilterOn: 'Фильтр аллергенов ({n})',
+      alTitle: 'Аллергены', alNone: 'Известных аллергенов нет',
+      add: 'Добавить в заказ', addMore: 'Добавить ещё одно', cart: 'Ваш заказ', viewCart: 'Открыть заказ',
+      items: 'поз.', total: 'Итого', table: 'Номер стола (по желанию)', note: 'Комментарий (по желанию)',
+      send: 'Отправить заказ в WhatsApp', clear: 'Очистить заказ', cartEmpty: 'Ваш заказ пуст.',
+      cartHint: 'Заказ откроется в WhatsApp как готовое сообщение. Перед отправкой его можно проверить.',
+      dec: 'Меньше', inc: 'Больше',
       demo: 'ДЕМО — пример меню', cats: 'Категории меню'
     }
   };
+
+  var AL = {
+    gluten:    { icon: '\uD83C\uDF3E', tr: 'Gluten',   en: 'Gluten',    de: 'Gluten',        ru: 'Глютен' },
+    dairy:     { icon: '\uD83E\uDD5B', tr: 'Süt',      en: 'Dairy',     de: 'Milch',         ru: 'Молоко' },
+    egg:       { icon: '\uD83E\uDD5A', tr: 'Yumurta',  en: 'Egg',       de: 'Ei',            ru: 'Яйца' },
+    nuts:      { icon: '\uD83E\uDD5C', tr: 'Kuruyemiş',en: 'Nuts',      de: 'Nüsse',         ru: 'Орехи' },
+    fish:      { icon: '\uD83D\uDC1F', tr: 'Balık',    en: 'Fish',      de: 'Fisch',         ru: 'Рыба' },
+    shellfish: { icon: '\uD83E\uDD90', tr: 'Deniz ürünü', en: 'Shellfish', de: 'Meeresfrüchte', ru: 'Морепродукты' },
+    sesame:    { icon: '\uD83E\uDD6F', tr: 'Susam',    en: 'Sesame',    de: 'Sesam',         ru: 'Кунжут' }
+  };
+  var AL_ORDER = ['gluten', 'dairy', 'egg', 'nuts', 'fish', 'shellfish', 'sesame'];
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var el = {
@@ -62,11 +101,41 @@
     sheetName: document.getElementById('sheet-name'),
     sheetDesc: document.getElementById('sheet-desc'),
     sheetPrice: document.getElementById('sheet-price'),
-    sheetTags: document.getElementById('sheet-tags')
+    sheetTags: document.getElementById('sheet-tags'),
+    sheetAl: document.getElementById('sheet-al'),
+    sheetAlT: document.getElementById('sheet-al-t'),
+    sheetAlList: document.getElementById('sheet-al-list'),
+    sheetAdd: document.getElementById('sheet-add'),
+    theme: document.getElementById('theme'),
+    themeColor: document.getElementById('theme-color'),
+    alfilter: document.getElementById('alfilter'),
+    alfilterSum: document.getElementById('alfilter-sum'),
+    alchips: document.getElementById('alchips'),
+    cartbar: document.getElementById('cartbar'),
+    cartbarN: document.getElementById('cartbar-n'),
+    cartbarL: document.getElementById('cartbar-l'),
+    cartbarP: document.getElementById('cartbar-p'),
+    cart: document.getElementById('cart'),
+    cartX: document.getElementById('cart-x'),
+    cartTitle: document.getElementById('cart-title'),
+    cartList: document.getElementById('cart-list'),
+    cartEmpty: document.getElementById('cart-empty'),
+    cartTotalL: document.getElementById('cart-total-l'),
+    cartTotal: document.getElementById('cart-total'),
+    cartTableL: document.getElementById('cart-table-l'),
+    cartTable: document.getElementById('cart-table'),
+    cartNoteL: document.getElementById('cart-note-l'),
+    cartNote: document.getElementById('cart-note'),
+    cartSend: document.getElementById('cart-send'),
+    cartClear: document.getElementById('cart-clear'),
+    cartHint: document.getElementById('cart-hint')
   };
 
   var lang = pickLang();
   var io = null;
+  var openItem = null;          /* detay penceresinde açık ürün */
+  var excluded = {};            /* alerjen filtresi: { gluten: true } */
+  var cart = loadCart();        /* { "c-i": adet } */
 
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
@@ -78,6 +147,53 @@
     if (saved && LANGS.indexOf(saved) > -1) return saved;
     var nav = ((navigator.language || 'en') + '').slice(0, 2).toLowerCase();
     return LANGS.indexOf(nav) > -1 ? nav : 'en';
+  }
+
+  function ordering() { return DATA.info.ordering !== false && !!DATA.info.whatsapp; }
+
+  function itemOf(key) {
+    var p = key.split('-');
+    var c = DATA.categories[+p[0]];
+    return c && c.items[+p[1]] ? c.items[+p[1]] : null;
+  }
+
+  function loadCart() {
+    var out = {};
+    try {
+      var raw = JSON.parse(safeGet('menu-cart') || '{}');
+      Object.keys(raw).forEach(function (k) {
+        var n = parseInt(raw[k], 10);
+        if (/^\d+-\d+$/.test(k) && n > 0 && itemOf(k)) out[k] = Math.min(n, 99);
+      });
+    } catch (e) { /* bozuk kayıt: boş sepetle başla */ }
+    return out;
+  }
+
+  function saveCart() { safeSet('menu-cart', JSON.stringify(cart)); }
+
+  function cartCount() {
+    return Object.keys(cart).reduce(function (a, k) { return a + cart[k]; }, 0);
+  }
+
+  function cartSum() {
+    return Object.keys(cart).reduce(function (a, k) { return a + cart[k] * itemOf(k).price; }, 0);
+  }
+
+  function changeQty(key, d) {
+    var n = (cart[key] || 0) + d;
+    if (n <= 0) delete cart[key];
+    else cart[key] = Math.min(n, 99);
+    saveCart();
+    refreshCart();
+  }
+
+  function applyTheme(mode) {
+    if (mode === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    else document.documentElement.removeAttribute('data-theme');
+    var light = mode === 'light';
+    el.theme.textContent = light ? '\u263E' : '\u2600';
+    el.theme.setAttribute('aria-pressed', String(light));
+    el.themeColor.setAttribute('content', light ? '#FAF6EE' : '#0B1820');
   }
 
   function t(obj) { return (obj && (obj[lang] || obj.en || obj.tr)) || ''; }
@@ -155,8 +271,7 @@
         ]);
 
         var node = h('button', {
-          type: 'button', class: 'item', 'data-c': String(ci), 'data-i': String(ii),
-          'data-s': (name + ' ' + desc).toLocaleLowerCase(lang)
+          type: 'button', class: 'item', 'data-c': String(ci), 'data-i': String(ii)
         }, [txt]);
 
         if (it.img || showEmpty) {
@@ -166,7 +281,18 @@
         } else {
           node.classList.add('solo');
         }
-        kids.push(node);
+        var row = h('div', {
+          class: 'row', 'data-key': ci + '-' + ii,
+          'data-s': (name + ' ' + desc).toLocaleLowerCase(lang),
+          'data-al': (it.al || []).join(',')
+        }, [node]);
+        if (ordering()) {
+          row.appendChild(h('button', {
+            type: 'button', class: 'add', 'data-key': ci + '-' + ii,
+            'aria-label': UI[lang].add + ': ' + name, text: '+'
+          }));
+        }
+        kids.push(row);
       });
       return h('section', { class: 'cat', id: 'cat-' + c.id }, kids);
     }));
@@ -182,6 +308,21 @@
     el.sheetDesc.hidden = !desc;
     el.sheetPrice.textContent = it.price + ' ₺';
     fill(el.sheetTags, tagNodes(it));
+
+    var alKeys = (it.al || []).filter(function (k) { return AL[k]; });
+    el.sheetAl.hidden = !Array.isArray(it.al);   /* alan hiç girilmemişse güvence verme */
+    el.sheetAlT.textContent = ui.alTitle;
+    if (alKeys.length) {
+      fill(el.sheetAlList, alKeys.map(function (k) {
+        return h('span', { class: 'alpill', text: AL[k].icon + ' ' + AL[k][lang] });
+      }));
+    } else {
+      fill(el.sheetAlList, [h('span', { class: 'alpill', text: ui.alNone })]);
+    }
+
+    openItem = it;
+    el.sheetAdd.hidden = !ordering();
+    el.sheetAdd.textContent = ui.add;
     el.sheetX.setAttribute('aria-label', ui.close);
     document.documentElement.classList.add('lock');
     if (typeof el.sheet.showModal === 'function') el.sheet.showModal();
@@ -224,9 +365,13 @@
     var anyVisible = false;
     Array.prototype.forEach.call(el.menu.querySelectorAll('.cat'), function (sec) {
       var visible = 0;
-      Array.prototype.forEach.call(sec.querySelectorAll('.item'), function (it) {
-        var ok = !q || it.getAttribute('data-s').indexOf(q) > -1;
-        it.hidden = !ok;
+      Array.prototype.forEach.call(sec.querySelectorAll('.row'), function (row) {
+        var ok = !q || row.getAttribute('data-s').indexOf(q) > -1;
+        if (ok) {
+          var al = row.getAttribute('data-al');
+          if (al) ok = !al.split(',').some(function (k) { return excluded[k]; });
+        }
+        row.hidden = !ok;
         if (ok) visible++;
       });
       sec.hidden = visible === 0;
@@ -235,6 +380,113 @@
       if (visible) anyVisible = true;
     });
     el.empty.hidden = anyVisible;
+  }
+
+  function renderAlFilter() {
+    var ui = UI[lang];
+    var used = {};
+    DATA.categories.forEach(function (c) {
+      c.items.forEach(function (it) { (it.al || []).forEach(function (k) { used[k] = true; }); });
+    });
+    var keys = AL_ORDER.filter(function (k) { return used[k]; });
+    el.alfilter.hidden = keys.length === 0;
+    el.alfilter.setAttribute('aria-label', ui.alFilter);
+    fill(el.alchips, keys.map(function (k) {
+      return h('button', {
+        type: 'button', class: 'alchip', 'data-al': k,
+        'aria-pressed': String(!!excluded[k]), text: AL[k].icon + ' ' + AL[k][lang]
+      });
+    }));
+    updateAlSummary();
+  }
+
+  function updateAlSummary() {
+    var n = Object.keys(excluded).filter(function (k) { return excluded[k]; }).length;
+    var ui = UI[lang];
+    el.alfilterSum.textContent = '';
+    el.alfilterSum.appendChild(document.createTextNode(ui.alFilter));
+    if (n) el.alfilterSum.appendChild(h('span', { class: 'cnt', text: String(n) }));
+  }
+
+  /* Satırlardaki + düğmeleri, alt çubuk ve (açıksa) sepet penceresini günceller */
+  function refreshCart() {
+    var ui = UI[lang];
+    var on = ordering();
+    var count = cartCount();
+
+    Array.prototype.forEach.call(el.menu.querySelectorAll('.add'), function (b) {
+      var q = cart[b.getAttribute('data-key')] || 0;
+      b.textContent = q ? String(q) : '+';
+      b.classList.toggle('has', q > 0);
+    });
+
+    el.cartbar.hidden = !on || count === 0;
+    document.body.classList.toggle('has-cart', on && count > 0);
+    el.cartbarN.textContent = String(count);
+    el.cartbarL.textContent = ui.viewCart;
+    el.cartbarP.textContent = cartSum() + ' ₺';
+
+    if (el.cart.open) renderCart();
+  }
+
+  function renderCart() {
+    var ui = UI[lang];
+    var keys = Object.keys(cart);
+    el.cartTitle.textContent = ui.cart;
+    el.cartX.setAttribute('aria-label', ui.close);
+    el.cartTotalL.textContent = ui.total;
+    el.cartTotal.textContent = cartSum() + ' ₺';
+    el.cartTableL.textContent = ui.table;
+    el.cartNoteL.textContent = ui.note;
+    el.cartSend.textContent = ui.send;
+    el.cartClear.textContent = ui.clear;
+    el.cartHint.textContent = ui.cartHint;
+    el.cartEmpty.textContent = ui.cartEmpty;
+    el.cartEmpty.hidden = keys.length > 0;
+    el.cartSend.disabled = keys.length === 0;
+    el.cartClear.hidden = keys.length === 0;
+
+    fill(el.cartList, keys.map(function (k) {
+      var it = itemOf(k);
+      var minus = h('button', { type: 'button', 'data-key': k, 'data-d': '-1', 'aria-label': ui.dec + ': ' + t(it.name), text: '\u2212' });
+      var plus = h('button', { type: 'button', 'data-key': k, 'data-d': '1', 'aria-label': ui.inc + ': ' + t(it.name), text: '+' });
+      return h('li', null, [
+        h('span', { class: 'cn', text: t(it.name) }),
+        h('span', { class: 'cp', text: (cart[k] * it.price) + ' ₺' }),
+        h('span', { class: 'qty' }, [minus, h('span', { text: String(cart[k]) }), plus])
+      ]);
+    }));
+  }
+
+  function openCart() {
+    renderCart();
+    document.documentElement.classList.add('lock');
+    if (typeof el.cart.showModal === 'function') el.cart.showModal();
+    else el.cart.setAttribute('open', '');
+    el.cart.scrollTop = 0;
+  }
+
+  function closeCart() {
+    if (typeof el.cart.close === 'function') el.cart.close();
+    else el.cart.removeAttribute('open');
+    document.documentElement.classList.remove('lock');
+  }
+
+  /* Sipariş mesajı: işletme personeli okuyacağı için her zaman Türkçe */
+  function orderMessage() {
+    var lines = ['Merhaba, sipariş vermek istiyorum.'];
+    var table = el.cartTable.value.trim();
+    if (table) lines.push('Masa: ' + table);
+    lines.push('');
+    Object.keys(cart).forEach(function (k) {
+      var it = itemOf(k);
+      lines.push('\u2022 ' + cart[k] + 'x ' + (it.name.tr || t(it.name)) + ' \u2014 ' + (cart[k] * it.price) + ' \u20BA');
+    });
+    lines.push('');
+    lines.push('Toplam: ' + cartSum() + ' \u20BA');
+    var note = el.cartNote.value.trim();
+    if (note) lines.push('Not: ' + note);
+    return lines.join('\n');
   }
 
   function copyText(text, btn, ui) {
@@ -295,7 +547,7 @@
     var info = DATA.info;
     if (info.cover) {
       el.hero.classList.add('has-cover');
-      el.hero.style.backgroundImage = 'linear-gradient(rgba(11,24,32,.5), #0B1820), url("' + encodeURI(info.cover) + '")';
+      el.hero.style.backgroundImage = 'linear-gradient(color-mix(in srgb, var(--bg) 50%, transparent), var(--bg)), url("' + encodeURI(info.cover) + '")';
     }
   }
 
@@ -313,10 +565,15 @@
     el.chips.setAttribute('aria-label', ui.cats);
     el.empty.textContent = ui.empty;
 
+    el.theme.setAttribute('aria-label', ui.theme);
+    el.theme.setAttribute('title', ui.theme);
+
     renderLangs();
     renderMenu();
+    renderAlFilter();
     renderFoot();
     applyFilter();
+    refreshCart();
     observe();
     if (DATA.categories.length) setActive(DATA.categories[0].id);
   }
@@ -339,6 +596,8 @@
   });
 
   el.menu.addEventListener('click', function (e) {
+    var a = e.target.closest('.add');
+    if (a) { changeQty(a.getAttribute('data-key'), 1); return; }
     var b = e.target.closest('.item');
     if (!b) return;
     var it = DATA.categories[+b.getAttribute('data-c')].items[+b.getAttribute('data-i')];
@@ -351,6 +610,57 @@
 
   el.q.addEventListener('input', applyFilter);
 
+  el.alchips.addEventListener('click', function (e) {
+    var b = e.target.closest('.alchip');
+    if (!b) return;
+    var k = b.getAttribute('data-al');
+    excluded[k] = !excluded[k];
+    b.setAttribute('aria-pressed', String(!!excluded[k]));
+    updateAlSummary();
+    applyFilter();
+  });
+
+  el.theme.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    safeSet('menu-theme', next);
+    applyTheme(next);
+  });
+
+  el.sheetAdd.addEventListener('click', function () {
+    if (!openItem) return;
+    for (var ci = 0; ci < DATA.categories.length; ci++) {
+      var ii = DATA.categories[ci].items.indexOf(openItem);
+      if (ii > -1) { changeQty(ci + '-' + ii, 1); break; }
+    }
+    closeSheet();
+  });
+
+  el.cartbar.addEventListener('click', openCart);
+  el.cartX.addEventListener('click', closeCart);
+  el.cart.addEventListener('click', function (e) { if (e.target === el.cart) closeCart(); });
+  el.cart.addEventListener('close', function () { document.documentElement.classList.remove('lock'); });
+
+  el.cartList.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-key]');
+    if (!b) return;
+    changeQty(b.getAttribute('data-key'), +b.getAttribute('data-d'));
+    if (!cartCount()) closeCart();
+  });
+
+  el.cartClear.addEventListener('click', function () {
+    cart = {};
+    saveCart();
+    refreshCart();
+    closeCart();
+  });
+
+  el.cartSend.addEventListener('click', function () {
+    if (!cartCount() || !DATA.info.whatsapp) return;
+    var url = 'https://wa.me/' + DATA.info.whatsapp + '?text=' + encodeURIComponent(orderMessage());
+    window.open(url, '_blank', 'noopener');
+  });
+
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
   renderHero();
   render();
 })();

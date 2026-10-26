@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0B1820">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" id="theme-color" content="#0B1820">
+  <meta name="color-scheme" content="dark light">
   <title>Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    /* Tema yanıp sönmesin diye sayfa çizilmeden önce uygula */
+    try { if (localStorage.getItem('menu-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+  </script>
 </head>
 <body>
   <div class="demo" id="demo" hidden></div>
 
   <header class="hero" id="hero">
+    <button type="button" class="theme" id="theme" aria-pressed="false"></button>
     <h1 class="name" id="name"></h1>
     <div class="rule" aria-hidden="true"></div>
     <p class="tagline" id="tagline"></p>
@@ -27,6 +32,10 @@
 
   <div class="search">
     <input id="q" type="search" autocomplete="off" enterkeyhint="search">
+    <details class="alfilter" id="alfilter">
+      <summary id="alfilter-sum"></summary>
+      <div class="alchips" id="alchips" role="group"></div>
+    </details>
   </div>
 
   <main id="menu"></main>
@@ -49,6 +58,36 @@
         <span class="pr" id="sheet-price"></span>
         <span class="tags" id="sheet-tags"></span>
       </div>
+      <div class="sheet-al" id="sheet-al" hidden>
+        <p class="sheet-al-t" id="sheet-al-t"></p>
+        <div class="alpills" id="sheet-al-list"></div>
+      </div>
+      <button type="button" class="btn primary sheet-add" id="sheet-add" hidden></button>
+    </div>
+  </dialog>
+
+  <button type="button" class="cartbar" id="cartbar" hidden>
+    <span class="cartbar-n" id="cartbar-n"></span>
+    <span class="cartbar-l" id="cartbar-l"></span>
+    <span class="cartbar-p" id="cartbar-p"></span>
+  </button>
+
+  <dialog id="cart" aria-labelledby="cart-title">
+    <button type="button" class="x" id="cart-x">&times;</button>
+    <div class="cart-body">
+      <h3 id="cart-title"></h3>
+      <ul class="cart-list" id="cart-list"></ul>
+      <p class="cart-empty" id="cart-empty" hidden></p>
+      <div class="cart-total"><span id="cart-total-l"></span><strong id="cart-total"></strong></div>
+      <label class="cart-field"><span id="cart-table-l"></span>
+        <input id="cart-table" type="text" inputmode="numeric" maxlength="10" autocomplete="off">
+      </label>
+      <label class="cart-field"><span id="cart-note-l"></span>
+        <textarea id="cart-note" rows="2" maxlength="200"></textarea>
+      </label>
+      <button type="button" class="btn primary cart-send" id="cart-send"></button>
+      <button type="button" class="cart-clear" id="cart-clear"></button>
+      <p class="cart-hint" id="cart-hint"></p>
     </div>
   </dialog>
 

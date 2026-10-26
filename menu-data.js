@@ -10,7 +10,14 @@
   info.placeholders: true ise fotoğrafı olmayan ürünlerde boş halka desenli alan görünür.
                      Hiç fotoğraf kullanılmayacaksa false yap, menü sadece yazıyla çıkar.
   info.credit      : En altta küçük bir imza satırı (örn. "Hazırlayan: Eren.ai"). Boşsa görünmez.
+  info.ordering    : true ise ürünlerde "+" butonu ve sepet çıkar. Sepet, siparişi WhatsApp mesajı olarak
+                     info.whatsapp numarasına gönderir. whatsapp boşsa sepet otomatik gizlenir.
   tags             : "p" = Çok sevilen, "v" = Vejetaryen, "s" = Acılı
+  al (ürün için)   : alerjen listesi. Seçenekler: gluten, dairy, egg, nuts, fish, shellfish, sesame
+                     Alerjen filtresi ve ürün detayındaki alerjen rozetleri buradan gelir.
+                     al: [] = "bilinen alerjen yok". Alan hiç yazılmazsa ürün detayında alerjen bölümü
+                     görünmez ve alerjen filtresi o ürünü gizlemez (veri yok demektir, güvenli demek değildir).
+                     Demodaki değerler örnektir, gerçek menüde mutfakla birlikte kontrol et.
   price            : sayı (TL)
   img (ürün için)  : isteğe bağlı, ürünün fotoğraf yolu. Örnek: img: "img/menemen.jpg"
                      Fotoğrafı img klasörüne koy. Kare veya 4:3 oranında, 800 piksel genişlikte yeterli.
@@ -20,6 +27,7 @@ window.MENU = {
     demo: true,
     cover: "",
     placeholders: true,
+    ordering: true,
     credit: "",
     name: "Demo Restoran & Cafe",
     tagline: {
@@ -47,7 +55,7 @@ window.MENU = {
             de: "Käseauswahl, Oliven, Tomate, Gurke, Honig, Kaymak, Eier und heißer Tee",
             ru: "Ассорти сыров, оливки, помидоры, огурцы, мёд, каймак, яйца и горячий чай"
           },
-          img: "img/serpme.svg", price: 450, tags: ["p", "v"]
+          img: "img/serpme.svg", price: 450, tags: ["p", "v"], al: ["dairy", "egg", "gluten"]
         },
         {
           name: { tr: "Menemen", en: "Menemen", de: "Menemen", ru: "Менемен" },
@@ -57,7 +65,7 @@ window.MENU = {
             de: "Rührei mit Tomaten und Paprika, dazu Brot",
             ru: "Яйца с помидорами и перцем, подаётся с хлебом"
           },
-          img: "img/menemen.svg", price: 220, tags: ["v"]
+          img: "img/menemen.svg", price: 220, tags: ["v"], al: ["egg", "gluten"]
         },
         {
           name: { tr: "Avokadolu Tost", en: "Avocado Toast", de: "Avocado-Toast", ru: "Тост с авокадо" },
@@ -67,7 +75,7 @@ window.MENU = {
             de: "Sauerteigbrot, Avocado und pochiertes Ei",
             ru: "Хлеб на закваске, авокадо и яйцо пашот"
           },
-          img: "img/tost.svg", price: 260, tags: ["v"]
+          img: "img/tost.svg", price: 260, tags: ["v"], al: ["gluten", "egg"]
         },
         {
           name: { tr: "Muzlu Çikolatalı Pankek", en: "Banana & Chocolate Pancakes", de: "Pfannkuchen mit Banane & Schokolade", ru: "Панкейки с бананом и шоколадом" },
@@ -77,7 +85,7 @@ window.MENU = {
             de: "Drei Pfannkuchen mit frischer Banane und Schokoladensauce",
             ru: "Три панкейка со свежим бананом и шоколадным соусом"
           },
-          img: "img/pankek.svg", price: 240, tags: ["v"]
+          img: "img/pankek.svg", price: 240, tags: ["v"], al: ["gluten", "dairy", "egg"]
         }
       ]
     },
@@ -93,7 +101,7 @@ window.MENU = {
             de: "Traditionelle Rote-Linsen-Suppe mit Zitrone",
             ru: "Традиционный суп-пюре из красной чечевицы с лимоном"
           },
-          img: "img/mercimek.svg", price: 110, tags: ["v"]
+          img: "img/mercimek.svg", price: 110, tags: ["v"], al: []
         },
         {
           name: { tr: "Humus", en: "Hummus", de: "Hummus", ru: "Хумус" },
@@ -103,7 +111,7 @@ window.MENU = {
             de: "Kichererbsenpüree mit Olivenöl und Chiliflocken",
             ru: "Нутовая паста с оливковым маслом и хлопьями чили"
           },
-          img: "img/humus.svg", price: 150, tags: ["v"]
+          img: "img/humus.svg", price: 150, tags: ["v"], al: ["sesame"]
         },
         {
           name: { tr: "Çıtır Kalamar", en: "Crispy Calamari", de: "Knusprige Calamari", ru: "Хрустящие кальмары" },
@@ -113,7 +121,7 @@ window.MENU = {
             de: "Mit Tartarsauce serviert",
             ru: "Подаются с соусом тартар"
           },
-          img: "img/kalamar.svg", price: 280, tags: ["p"]
+          img: "img/kalamar.svg", price: 280, tags: ["p"], al: ["shellfish", "gluten", "egg"]
         },
         {
           name: { tr: "Sigara Böreği", en: "Cheese Rolls (Sigara Böreği)", de: "Käse-Röllchen (Sigara Böreği)", ru: "Сигара бёрек (сырные рулетики)" },
@@ -123,7 +131,7 @@ window.MENU = {
             de: "Dünner Teig mit Schafskäsefüllung",
             ru: "Тонкое тесто юфка с начинкой из сыра фета"
           },
-          img: "img/sigara.svg", price: 170, tags: ["v"]
+          img: "img/sigara.svg", price: 170, tags: ["v"], al: ["gluten", "dairy"]
         }
       ]
     },
@@ -149,7 +157,7 @@ window.MENU = {
             de: "Marinierte Hähnchenspieße mit Bulgur-Pilaw und Salat",
             ru: "Маринованная курица с булгуром и салатом"
           },
-          img: "img/tavuksis.svg", price: 360, tags: []
+          img: "img/tavuksis.svg", price: 360, tags: [], al: ["gluten"]
         },
         {
           name: { tr: "Levrek Izgara", en: "Grilled Sea Bass", de: "Gegrillter Wolfsbarsch", ru: "Сибас на гриле" },
@@ -159,7 +167,7 @@ window.MENU = {
             de: "Frischer Wolfsbarsch mit Rucola-Salat und Zitrone",
             ru: "Свежий сибас с салатом из руколы и лимоном"
           },
-          img: "img/levrek.svg", price: 480, tags: []
+          img: "img/levrek.svg", price: 480, tags: [], al: ["fish"]
         },
         {
           name: { tr: "Klasik Burger", en: "Classic Burger", de: "Klassischer Burger", ru: "Классический бургер" },
@@ -169,7 +177,7 @@ window.MENU = {
             de: "Rindfleisch-Patty und Cheddar, mit Pommes",
             ru: "Говяжья котлета и чеддер, подаётся с картофелем фри"
           },
-          img: "img/burger.svg", price: 340, tags: ["p"]
+          img: "img/burger.svg", price: 340, tags: ["p"], al: ["gluten", "dairy", "sesame"]
         },
         {
           name: { tr: "Penne Arrabbiata", en: "Penne Arrabbiata", de: "Penne Arrabbiata", ru: "Пенне арраббиата" },
@@ -179,7 +187,7 @@ window.MENU = {
             de: "Scharfe Tomatensauce, Knoblauch und Basilikum",
             ru: "Острый томатный соус, чеснок и базилик"
           },
-          img: "img/penne.svg", price: 270, tags: ["v", "s"]
+          img: "img/penne.svg", price: 270, tags: ["v", "s"], al: ["gluten"]
         }
       ]
     },
@@ -195,7 +203,7 @@ window.MENU = {
             de: "Mit Pistazien",
             ru: "С фисташками"
           },
-          img: "img/baklava.svg", price: 220, tags: ["p"]
+          img: "img/baklava.svg", price: 220, tags: ["p"], al: ["gluten", "nuts", "dairy"]
         },
         {
           name: { tr: "Künefe", en: "Künefe", de: "Künefe", ru: "Кюнефе" },
@@ -205,7 +213,7 @@ window.MENU = {
             de: "Heiß serviert, mit Eis",
             ru: "Подаётся горячим с мороженым"
           },
-          img: "img/kunefe.svg", price: 240, tags: []
+          img: "img/kunefe.svg", price: 240, tags: [], al: ["gluten", "dairy", "nuts"]
         },
         {
           name: { tr: "Fırın Sütlaç", en: "Baked Rice Pudding", de: "Gebackener Milchreis", ru: "Запечённый рисовый пудинг" },
@@ -215,7 +223,7 @@ window.MENU = {
             de: "Traditionelles Rezept mit goldener Kruste",
             ru: "Традиционный рецепт с золотистой корочкой"
           },
-          img: "img/sutlac.svg", price: 140, tags: []
+          img: "img/sutlac.svg", price: 140, tags: [], al: ["dairy"]
         },
         {
           name: { tr: "Dondurma (3 top)", en: "Ice Cream (3 scoops)", de: "Eis (3 Kugeln)", ru: "Мороженое (3 шарика)" },
@@ -225,7 +233,7 @@ window.MENU = {
             de: "Vanille, Schokolade, Erdbeere",
             ru: "Ваниль, шоколад, клубника"
           },
-          img: "img/dondurma.svg", price: 130, tags: ["v"]
+          img: "img/dondurma.svg", price: 130, tags: ["v"], al: ["dairy", "egg"]
         }
       ]
     },
@@ -241,17 +249,17 @@ window.MENU = {
             de: "Ohne Zucker, mittel oder süß",
             ru: "Без сахара, средний или сладкий"
           },
-          img: "img/kahve.svg", price: 90, tags: []
+          img: "img/kahve.svg", price: 90, tags: [], al: []
         },
         {
           name: { tr: "Çay", en: "Turkish Tea", de: "Türkischer Tee", ru: "Турецкий чай" },
           desc: { tr: "", en: "", de: "", ru: "" },
-          img: "img/cay.svg", price: 30, tags: []
+          img: "img/cay.svg", price: 30, tags: [], al: []
         },
         {
           name: { tr: "Taze Portakal Suyu", en: "Fresh Orange Juice", de: "Frisch gepresster Orangensaft", ru: "Свежевыжатый апельсиновый сок" },
           desc: { tr: "", en: "", de: "", ru: "" },
-          img: "img/portakal.svg", price: 120, tags: []
+          img: "img/portakal.svg", price: 120, tags: [], al: []
         },
         {
           name: { tr: "Ev Yapımı Limonata", en: "Homemade Lemonade", de: "Hausgemachte Limonade", ru: "Домашний лимонад" },
@@ -261,12 +269,12 @@ window.MENU = {
             de: "Mit frischer Minze",
             ru: "Со свежей мятой"
           },
-          img: "img/limonata.svg", price: 110, tags: ["p"]
+          img: "img/limonata.svg", price: 110, tags: ["p"], al: []
         },
         {
           name: { tr: "Ayran", en: "Ayran (yogurt drink)", de: "Ayran (Joghurtgetränk)", ru: "Айран (кисломолочный напиток)" },
           desc: { tr: "", en: "", de: "", ru: "" },
-          img: "img/ayran.svg", price: 60, tags: []
+          img: "img/ayran.svg", price: 60, tags: [], al: ["dairy"]
         }
       ]
     }

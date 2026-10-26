@@ -7,6 +7,9 @@ Neler var:
 - Yapışkan kategori sekmeleri ve menüde arama
 - Her ürünün yanında küçük fotoğraf alanı. Ürüne dokununca büyük fotoğraflı detay penceresi açılır.
 - Altta WhatsApp, Instagram ve Wi-Fi şifresi (kopyalama butonlu)
+- WhatsApp'a sipariş sepeti: ürünlerde "+" butonu, adet ayarı, masa numarası ve not, hazır mesajla gönderme
+- Alerjen filtresi ve ürün detayında alerjen rozetleri (4 dilde)
+- Gündüz / gece teması (seçim hatırlanır)
 
 ## Dosyalar
 
@@ -18,6 +21,12 @@ Neler var:
 | `menu-data.js` | **Menü içeriği. Müşteri için sadece bunu düzenlersin.** |
 | `img/` | Yemek ve kapak fotoğrafları buraya |
 | `make_qr.py` | QR kod üretici (PNG + SVG) |
+
+## Sipariş sepeti, alerjen ve tema
+
+- **Sepet:** `menu-data.js` içinde `info.ordering: true` ve `info.whatsapp` doluysa çıkar. Müşteri "+" ile ürün ekler, alttaki çubuktan sepeti açar, masa numarası ve not yazıp **WhatsApp ile siparişi gönder** der. Mesaj işletme personeli okuyacağı için her zaman Türkçe hazırlanır. Sepet tarayıcıda saklanır, sayfa yenilense de kaybolmaz. Sipariş gerçekten işletmeye ancak müşteri WhatsApp'ta "gönder" tuşuna basınca ulaşır; panel veya sipariş kaydı yoktur.
+- **Alerjen:** Ürüne `al: ["gluten", "dairy"]` gibi bir liste ekle (seçenekler: `gluten`, `dairy`, `egg`, `nuts`, `fish`, `shellfish`, `sesame`). Menünün üstündeki **Alerjen filtresi** seçilen alerjeni içeren ürünleri gizler. `al: []` "bilinen alerjen yok" demektir. Alan hiç yazılmazsa o ürün filtreden etkilenmez ve detayında alerjen bölümü görünmez. Demodaki değerler örnektir, gerçek menüde mutfakla kontrol et.
+- **Tema:** Sağ üstteki düğme gündüz / gece temasını değiştirir. Renkler `style.css` içindeki `:root` ve `:root[data-theme="light"]` bölümlerindedir.
 
 ## 1. Bilgisayarda önizleme
 
