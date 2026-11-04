@@ -19,7 +19,7 @@ Neler var:
 | Dosya | Görevi |
 |---|---|
 | `index.html` | Sayfa iskeleti |
-| `style.css` | Tasarım (renkler en üstteki `:root` bölümünde) |
+| `style.css` | Tasarım (renkler ve yazı tipleri en üstteki `:root` bölümünde: `--brass` vurgu, `--serif` başlık, `--sans` metin) |
 | `app.js` | Dil seçici, sekmeler, arama, detay penceresi |
 | `menu-data.js` | **Menü içeriği. Müşteri için sadece bunu düzenlersin.** |
 | `img/` | Yemek ve kapak fotoğrafları buraya |
@@ -115,5 +115,5 @@ python make_qr.py https://proje-adi.pages.dev --masalar 12 --ad "Demo Restoran" 
 ## Notlar
 
 - Fiyatlar ve yemekler örnek veridir, gerçek bir işletmeye ait değildir.
-- Yazı tipleri Google Fonts'tan yüklenir. İnternet yoksa sistem yazı tipine döner, sayfa yine çalışır.
+- Yazı tipleri (başlıklar Cormorant Garamond, metin Onest; ikisi de Türkçe ve Rusça karakterleri destekler) Google Fonts'tan yüklenir. İnternet yoksa sistem yazı tipine döner, sayfa yine çalışır.
 - Menü her zaman koyu temada açılır.
