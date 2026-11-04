@@ -184,3 +184,32 @@
 @media (prefers-reduced-motion: reduce) {
   .ph-card.fresh { animation: none; }
 }
+
+/* Garson çağrıları */
+.ph-calls {
+  display: grid;
+  gap: 10px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 20px 0;
+}
+
+.ph-calls:empty { display: none; }
+
+.ph-call {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--spicy);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.ph-call.fresh { animation: flash 2.4s ease-out; }
+.ph-call-t { font-weight: 700; font-size: 17px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-call.fresh { animation: none; }
+}

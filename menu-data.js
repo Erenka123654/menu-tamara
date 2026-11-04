@@ -15,6 +15,10 @@
   info.payment     : "test" ise sepette "Şimdi öde (test)" butonu çıkar: gerçek para çekilmeyen, ekranda
                      TEST MODU yazan ödeme akışı. Sipariş mutfak.html panelinde görünür. Boş/false ise ödeme yok,
                      sadece WhatsApp ile gönderme kalır. (info.ordering ve info.whatsapp de dolu olmalı.)
+  info.waiterCall  : false yaparsan masa QR'ında "Garson çağır" düğmesi çıkmaz. Düğme yalnızca adres
+                     ?masa=7 gibi bir masa numarasıyla açılınca görünür (make_qr.py --masalar ile üretilen QR'lar).
+  soldOut (ürün için): true yazarsan ürün "Tükendi" olarak işaretlenir ve sepete eklenemez.
+                     Ürün tekrar gelince satırı sil veya false yap.
   tags             : "p" = Çok sevilen, "v" = Vejetaryen, "s" = Acılı
   al (ürün için)   : alerjen listesi. Seçenekler: gluten, dairy, egg, nuts, fish, shellfish, sesame
                      Alerjen filtresi ve ürün detayındaki alerjen rozetleri buradan gelir.
@@ -125,7 +129,7 @@ window.MENU = {
             de: "Mit Tartarsauce serviert",
             ru: "Подаются с соусом тартар"
           },
-          img: "img/kalamar.svg", price: 280, tags: ["p"], al: ["shellfish", "gluten", "egg"]
+          img: "img/kalamar.svg", price: 280, tags: ["p"], al: ["shellfish", "gluten", "egg"], soldOut: true
         },
         {
           name: { tr: "Sigara Böreği", en: "Cheese Rolls (Sigara Böreği)", de: "Käse-Röllchen (Sigara Böreği)", ru: "Сигара бёрек (сырные рулетики)" },

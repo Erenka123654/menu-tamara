@@ -16,6 +16,7 @@
   var el = {
     biz: document.getElementById('biz'),
     list: document.getElementById('list'),
+    calls: document.getElementById('calls'),
     empty: document.getElementById('empty'),
     tabActive: document.getElementById('tab-active'),
     tabDone: document.getElementById('tab-done'),
@@ -25,6 +26,7 @@
 
   var tab = 'active';
   var known = {};      /* görülmüş sipariş numaraları: yenileri vurgulamak için */
+  var knownCalls = {}; /* görülmüş garson çağrıları */
   var firstRender = true;
 
   function h(tag, props, kids) {
@@ -81,6 +83,17 @@
     return h('article', { class: 'ph-card' + (isNew ? ' fresh' : ''), 'data-status': o.status }, kids);
   }
 
+  function callCard(c) {
+    var isNew = !firstRender && !knownCalls[c.id];
+    return h('article', { class: 'ph-call' + (isNew ? ' fresh' : '') }, [
+      h('div', null, [
+        h('div', { class: 'ph-call-t', text: '\uD83D\uDD14 Masa ' + c.table + ' garson istiyor' }),
+        h('div', { class: 'ph-meta', text: clock(c.ts) })
+      ]),
+      h('button', { type: 'button', class: 'ph-btn', 'data-call': c.id, text: 'Geldi' })
+    ]);
+  }
+
   function render() {
     var all = Store.list();
     var active = all.filter(function (o) { return o.status !== 'done'; });
@@ -94,7 +107,13 @@
     var shown = tab === 'active' ? active.slice().reverse() : done;   /* aktifte en eski üstte */
     el.list.textContent = '';
     shown.forEach(function (o) { el.list.appendChild(card(o)); });
-    el.empty.hidden = shown.length > 0;
+
+    var calls = Store.calls().filter(function (c) { return !c.done; });
+    el.calls.textContent = '';
+    if (tab === 'active') calls.forEach(function (c) { el.calls.appendChild(callCard(c)); });
+    Store.calls().forEach(function (c) { knownCalls[c.id] = true; });
+
+    el.empty.hidden = shown.length > 0 || (tab === 'active' && calls.length > 0);
     el.empty.textContent = tab === 'active'
       ? 'Şu an bekleyen sipariş yok. Müşteri ödeme yapınca burada görünür.'
       : 'Henüz tamamlanan sipariş yok.';
@@ -107,6 +126,13 @@
     var b = e.target.closest('button[data-id]');
     if (!b) return;
     Store.setStatus(b.getAttribute('data-id'), b.getAttribute('data-to'));
+    render();
+  });
+
+  el.calls.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-call]');
+    if (!b) return;
+    Store.resolveCall(b.getAttribute('data-call'));
     render();
   });
 

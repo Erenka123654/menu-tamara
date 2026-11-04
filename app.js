@@ -19,6 +19,7 @@
       toKitchen: 'Siparişiniz mutfağa iletildi. Masanızdan kalkmanıza gerek yok.',
       payNote: 'Bu bir demodur: kart bilgisi istenmez ve hiçbir ücret çekilmez.', ok: 'Tamam', tableLbl: 'Masa',
       st_paid: 'Sipariş alındı', st_preparing: 'Hazırlanıyor', st_ready: 'Hazır, afiyet olsun', st_done: 'Teslim edildi',
+      waiter: 'Garson çağır', waiterSent: 'Garson çağrıldı', sold: 'Tükendi',
       theme: 'Temayı değiştir', alFilter: 'Alerjen filtresi', alFilterOn: 'Alerjen filtresi ({n})',
       alTitle: 'Alerjenler', alNone: 'Bilinen alerjen yok',
       add: 'Sepete ekle', addMore: 'Sepete bir tane daha ekle', cart: 'Sepetim', viewCart: 'Sepeti gör',
@@ -40,6 +41,7 @@
       toKitchen: 'Your order was sent to the kitchen. No need to leave your table.',
       payNote: 'This is a demo: no card details are asked for and nothing is charged.', ok: 'Done', tableLbl: 'Table',
       st_paid: 'Order received', st_preparing: 'Preparing', st_ready: 'Ready, enjoy your meal', st_done: 'Delivered',
+      waiter: 'Call a waiter', waiterSent: 'Waiter called', sold: 'Sold out',
       theme: 'Switch theme', alFilter: 'Allergen filter', alFilterOn: 'Allergen filter ({n})',
       alTitle: 'Allergens', alNone: 'No known allergens',
       add: 'Add to order', addMore: 'Add one more', cart: 'Your order', viewCart: 'View order',
@@ -61,6 +63,7 @@
       toKitchen: 'Ihre Bestellung wurde an die Küche übermittelt. Sie müssen nicht aufstehen.',
       payNote: 'Dies ist eine Demo: Es werden keine Kartendaten abgefragt und nichts abgebucht.', ok: 'Fertig', tableLbl: 'Tisch',
       st_paid: 'Bestellung erhalten', st_preparing: 'Wird zubereitet', st_ready: 'Fertig, guten Appetit', st_done: 'Serviert',
+      waiter: 'Kellner rufen', waiterSent: 'Kellner gerufen', sold: 'Ausverkauft',
       theme: 'Design wechseln', alFilter: 'Allergenfilter', alFilterOn: 'Allergenfilter ({n})',
       alTitle: 'Allergene', alNone: 'Keine bekannten Allergene',
       add: 'Zur Bestellung', addMore: 'Noch eins hinzufügen', cart: 'Ihre Bestellung', viewCart: 'Bestellung ansehen',
@@ -82,6 +85,7 @@
       toKitchen: 'Заказ передан на кухню. Вставать из-за стола не нужно.',
       payNote: 'Это демо: данные карты не запрашиваются, деньги не списываются.', ok: 'Готово', tableLbl: 'Стол',
       st_paid: 'Заказ принят', st_preparing: 'Готовится', st_ready: 'Готово, приятного аппетита', st_done: 'Выдано',
+      waiter: 'Позвать официанта', waiterSent: 'Официант вызван', sold: 'Нет в наличии',
       theme: 'Сменить тему', alFilter: 'Фильтр аллергенов', alFilterOn: 'Фильтр аллергенов ({n})',
       alTitle: 'Аллергены', alNone: 'Известных аллергенов нет',
       add: 'Добавить в заказ', addMore: 'Добавить ещё одно', cart: 'Ваш заказ', viewCart: 'Открыть заказ',
@@ -152,6 +156,9 @@
     cartNote: document.getElementById('cart-note'),
     cartSend: document.getElementById('cart-send'),
     cartPay: document.getElementById('cart-pay'),
+    tableRow: document.getElementById('table-row'),
+    tableBadge: document.getElementById('table-badge'),
+    waiter: document.getElementById('waiter'),
     pay: document.getElementById('pay'),
     payX: document.getElementById('pay-x'),
     payTest: document.getElementById('pay-test'),
@@ -179,6 +186,7 @@
   var openItem = null;          /* detay penceresinde açık ürün */
   var excluded = {};            /* alerjen filtresi: { gluten: true } */
   var cart = loadCart();        /* { "c-i": adet } */
+  var table = readTable();      /* QR'dan gelen masa numarası (?masa=7), yoksa '' */
   var payToken = 0;             /* ödeme işlemi iptal/yenileme koruması */
   var payOrderId = null;        /* ödeme sonrası takip edilen sipariş */
 
@@ -199,6 +207,12 @@
     if (!document.querySelector('dialog[open]')) document.documentElement.classList.remove('lock');
   }
 
+  /* ?masa=7 → "7". Yalnızca harf, rakam ve tire; en fazla 10 karakter */
+  function readTable() {
+    var v = new URLSearchParams(location.search).get('masa') || '';
+    return /^[A-Za-z0-9-]{1,10}$/.test(v) ? v : '';
+  }
+
   function ordering() { return DATA.info.ordering !== false && !!DATA.info.whatsapp; }
   function paying() { return ordering() && DATA.info.payment === 'test' && !!window.OrderStore; }
 
@@ -214,7 +228,7 @@
       var raw = JSON.parse(safeGet('menu-cart') || '{}');
       Object.keys(raw).forEach(function (k) {
         var n = parseInt(raw[k], 10);
-        if (/^\d+-\d+$/.test(k) && n > 0 && itemOf(k)) out[k] = Math.min(n, 99);
+        if (/^\d+-\d+$/.test(k) && n > 0 && itemOf(k) && !itemOf(k).soldOut) out[k] = Math.min(n, 99);
       });
     } catch (e) { /* bozuk kayıt: boş sepetle başla */ }
     return out;
@@ -231,6 +245,8 @@
   }
 
   function changeQty(key, d) {
+    var it = itemOf(key);
+    if (d > 0 && (!it || it.soldOut)) return;      /* tükenen ürün sepete eklenemez */
     var n = (cart[key] || 0) + d;
     if (n <= 0) delete cart[key];
     else cart[key] = Math.min(n, 99);
@@ -269,9 +285,11 @@
 
   function tagNodes(it) {
     var ui = UI[lang];
-    return (it.tags || []).map(function (g) {
+    var out = (it.tags || []).map(function (g) {
       return h('span', { class: 'tg ' + g, text: ui[g] });
     });
+    if (it.soldOut) out.unshift(h('span', { class: 'tg out', text: ui.sold }));
+    return out;
   }
 
   /* Fotoğraf: img verilmişse görsel, yoksa halka desenli boş alan */
@@ -333,11 +351,11 @@
           node.classList.add('solo');
         }
         var row = h('div', {
-          class: 'row', 'data-key': ci + '-' + ii,
+          class: 'row' + (it.soldOut ? ' sold' : ''), 'data-key': ci + '-' + ii,
           'data-s': (name + ' ' + desc).toLocaleLowerCase(lang),
           'data-al': (it.al || []).join(',')
         }, [node]);
-        if (ordering()) {
+        if (ordering() && !it.soldOut) {
           row.appendChild(h('button', {
             type: 'button', class: 'add', 'data-key': ci + '-' + ii,
             'aria-label': UI[lang].add + ': ' + name, text: '+'
@@ -372,7 +390,7 @@
     }
 
     openItem = it;
-    el.sheetAdd.hidden = !ordering();
+    el.sheetAdd.hidden = !ordering() || !!it.soldOut;
     el.sheetAdd.textContent = ui.add;
     el.sheetX.setAttribute('aria-label', ui.close);
     document.documentElement.classList.add('lock');
@@ -431,6 +449,21 @@
       if (visible) anyVisible = true;
     });
     el.empty.hidden = anyVisible;
+  }
+
+  /* Masa rozeti ve "Garson çağır" düğmesi (yalnızca QR'da ?masa= varsa görünür) */
+  function renderTable() {
+    var ui = UI[lang];
+    var on = !!table;
+    el.tableRow.hidden = !on;
+    if (!on) return;
+    el.tableBadge.textContent = ui.tableLbl + ' ' + table;
+    var canCall = DATA.info.waiterCall !== false && !!window.OrderStore;
+    el.waiter.hidden = !canCall;
+    if (!canCall) return;
+    var open = !!window.OrderStore.openCall(table);
+    el.waiter.textContent = (open ? '\u2713 ' + ui.waiterSent : '\uD83D\uDD14 ' + ui.waiter);
+    el.waiter.disabled = open;
   }
 
   function renderAlFilter() {
@@ -728,6 +761,7 @@
     renderLangs();
     renderMenu();
     renderAlFilter();
+    renderTable();
     renderFoot();
     applyFilter();
     refreshCart();
@@ -812,11 +846,18 @@
   el.pay.addEventListener('close', function () { payToken++; unlock(); });
   if (window.OrderStore) {
     window.OrderStore.onChange(function () {
+      renderTable();
       if (!payOrderId || !el.pay.open) return;
       var o = window.OrderStore.get(payOrderId);
       if (o) renderSteps(o.status);
     });
   }
+
+  el.waiter.addEventListener('click', function () {
+    if (!table || !window.OrderStore) return;
+    window.OrderStore.addCall(table);
+    renderTable();
+  });
 
   el.cartClear.addEventListener('click', function () {
     cart = {};
@@ -831,6 +872,7 @@
     window.open(url, '_blank', 'noopener');
   });
 
+  if (table) el.cartTable.value = table;
   applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
   renderHero();
   render();

@@ -11,6 +11,8 @@ Neler var:
 - Alerjen filtresi ve ürün detayında alerjen rozetleri (4 dilde)
 - Gündüz / gece teması (seçim hatırlanır)
 - Test modlu ödeme akışı ve mutfak paneli (`mutfak.html`): müşteri masadan kalkmadan "öder", sipariş panelde görünür, durum müşteriye canlı yansır
+- Masa numaralı QR: her masaya ayrı QR, masa numarası sepete ve siparişe otomatik yazılır, "Garson çağır" düğmesi
+- Ürünleri "Tükendi" olarak işaretleme
 
 ## Dosyalar
 
@@ -21,7 +23,7 @@ Neler var:
 | `app.js` | Dil seçici, sekmeler, arama, detay penceresi |
 | `menu-data.js` | **Menü içeriği. Müşteri için sadece bunu düzenlersin.** |
 | `img/` | Yemek ve kapak fotoğrafları buraya |
-| `make_qr.py` | QR kod üretici (PNG + SVG) |
+| `make_qr.py` | QR kod üretici (tek QR veya her masa için ayrı QR + yazdırılabilir sayfa) |
 
 ## Sipariş sepeti, alerjen ve tema
 
@@ -92,6 +94,23 @@ python make_qr.py https://proje-adi.pages.dev -o tamara-qr
 - `tamara-qr.svg`: masa standı veya sticker baskısı için (istediğin boyuta büyütülebilir)
 
 Baskıdan önce telefonunla taratıp doğru sayfanın açıldığını kontrol et. Basılı QR en az 3 x 3 cm olmalı.
+
+### Her masa için ayrı QR
+
+```
+python make_qr.py https://proje-adi.pages.dev --masalar 12 --ad "Demo Restoran" -o qr-masalar
+```
+
+`qr-masalar/` klasöründe her masa için `masa-1.png`, `masa-1.svg` ... ve yazdırılabilir **`masalar.html`** oluşur. `masalar.html` dosyasını tarayıcıda açıp yazdır: A4 kâğıda 6 masa sığar, kartlar kesilip masaya konur. Masa QR'ı adrese `?masa=7` ekler. Bu adresle açılınca:
+
+- Üstte **Masa 7** rozeti çıkar, sepetteki masa alanı kendiliğinden dolar (müşteri numara yazmaz). Masa numarası WhatsApp mesajına ve mutfak paneline de gider.
+- **Garson çağır** düğmesi çıkar. Basılınca `mutfak.html` panelinde "Masa 7 garson istiyor" kartı belirir, personel **Geldi** deyince düğme müşteride yeniden açılır. Kapatmak için `menu-data.js` içinde `info.waiterCall: false` yap.
+- Gösterim için QR'a gerek yok: adresin sonuna `?masa=7` yazman yeterli (örn. `index.html?masa=7`).
+- Garson çağırma da siparişler gibi demodur: yalnızca aynı tarayıcıdaki paneli bilgilendirir (bkz. "Test ödeme ve mutfak paneli").
+
+## Ürünü "Tükendi" yapma
+
+`menu-data.js` içinde ilgili ürünün satırına `soldOut: true` ekle. Ürün listede soluk ve üstü çizili görünür, "Tükendi" etiketi çıkar, sepete eklenemez (detayı yine açılır, arama yine bulur). Tekrar gelince satırı sil veya `false` yap. Demoda "Çıtır Kalamar" örnek olarak tükendi işaretlidir.
 
 ## Notlar
 

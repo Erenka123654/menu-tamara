@@ -856,3 +856,44 @@ body.has-cart .foot { padding-bottom: 110px; }
 .cart-pay:disabled { opacity: 0.45; cursor: not-allowed; }
 .cart-pay + .cart-send { margin-top: 10px; }
 .cart-send:not(.primary) { background: none; border: 1px solid var(--brass); color: var(--brass); }
+
+/* Masa rozeti ve garson çağır */
+.table-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.table-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--brass);
+  color: var(--on-brass);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.waiter {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--brass);
+  border-radius: 22px;
+  background: none;
+  color: var(--brass);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.waiter:disabled {
+  border-color: var(--veg);
+  color: var(--veg);
+  cursor: default;
+}
+
+/* Tükenen ürün */
+.row.sold .item { opacity: 0.5; }
+.row.sold .nm { text-decoration: line-through; text-decoration-thickness: 1px; }
+.tg.out { color: var(--spicy); }

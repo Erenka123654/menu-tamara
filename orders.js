@@ -12,6 +12,7 @@ window.OrderStore = (function () {
   'use strict';
 
   var KEY = 'menu-orders';
+  var CALLS_KEY = 'menu-calls';
   var STATUSES = ['paid', 'preparing', 'ready', 'done'];
 
   function read() {
@@ -23,6 +24,17 @@ window.OrderStore = (function () {
 
   function write(list) {
     try { localStorage.setItem(KEY, JSON.stringify(list.slice(0, 200))); } catch (e) { /* ignore */ }
+  }
+
+  function readCalls() {
+    try {
+      var a = JSON.parse(localStorage.getItem(CALLS_KEY) || '[]');
+      return Array.isArray(a) ? a : [];
+    } catch (e) { return []; }
+  }
+
+  function writeCalls(list) {
+    try { localStorage.setItem(CALLS_KEY, JSON.stringify(list.slice(0, 100))); } catch (e) { /* ignore */ }
   }
 
   function nextId(list) {
@@ -71,11 +83,37 @@ window.OrderStore = (function () {
       write(list);
     },
 
-    clear: function () { write([]); },
+    /* Garson çağrıları: { id, ts, table, done } */
+    calls: readCalls,
+
+    openCall: function (table) {
+      var all = readCalls();
+      for (var i = 0; i < all.length; i++) if (!all[i].done && all[i].table === table) return all[i];
+      return null;
+    },
+
+    /* Aynı masa için açık çağrı varsa yenisini eklemez */
+    addCall: function (table) {
+      var existing = this.openCall(table);
+      if (existing) return existing;
+      var list = readCalls();
+      var call = { id: 'c' + Date.now(), ts: Date.now(), table: String(table), done: false };
+      list.unshift(call);
+      writeCalls(list);
+      return call;
+    },
+
+    resolveCall: function (id) {
+      var list = readCalls();
+      list.forEach(function (c) { if (c.id === id) c.done = true; });
+      writeCalls(list);
+    },
+
+    clear: function () { write([]); writeCalls([]); },
 
     /* Başka sekmede/pencerede sipariş değişince çağrılır */
     onChange: function (fn) {
-      window.addEventListener('storage', function (e) { if (e.key === KEY) fn(); });
+      window.addEventListener('storage', function (e) { if (e.key === KEY || e.key === CALLS_KEY) fn(); });
     }
   };
 })();
